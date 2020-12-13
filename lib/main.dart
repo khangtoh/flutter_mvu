@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dartea/dartea.dart';
 
 void main() {
-  final program = Program<CounterModel, Command, Null>(
+  final program = Program<CounterModel, Message>(
     init,
     update,
     view,
@@ -38,17 +38,17 @@ class CounterModel {
   String toString() => '$counter';
 }
 
-abstract class Command {}
+abstract class Message {}
 
-class Increment implements Command {}
+class Increment implements Message {}
 
-class Decrement implements Command {}
+class Decrement implements Message {}
 
 // Init
-Upd<CounterModel, Command> init() => Upd(CounterModel(0));
+Upd<CounterModel, Message> init() => Upd(CounterModel(0));
 
 // Update
-Upd<CounterModel, Command> update(Command cmd, CounterModel model) {
+Upd<CounterModel, Message> update(Message cmd, CounterModel model) {
   switch (cmd.runtimeType) {
     case Increment:
       return Upd(model.copyWith(counter: model.counter + 1));
@@ -64,7 +64,7 @@ Upd<CounterModel, Command> update(Command cmd, CounterModel model) {
 
 // View
 Widget view(
-    BuildContext context, Dispatch<Command> dispatch, CounterModel model) {
+    BuildContext context, Dispatch<Message> dispatch, CounterModel model) {
   return Scaffold(
     appBar: AppBar(
       title: Text("Flutter MVU"),
