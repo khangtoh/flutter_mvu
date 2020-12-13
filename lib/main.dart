@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dartea/dartea.dart';
 
 void main() {
-  final program = Program<CounterModel, Message>(
+  final program = Program<CounterModel, Message, Null>(
     init,
     update,
     view,
